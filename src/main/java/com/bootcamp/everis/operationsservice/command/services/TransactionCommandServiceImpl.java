@@ -17,6 +17,7 @@ public class TransactionCommandServiceImpl implements TransactionCommandService 
 
     @Override
     public Mono<Transaction> create(Transaction transaction) {
+        transaction.setDate(LocalDateTime.now());
         return transactionRepository.save(transaction);
     }
 
@@ -24,7 +25,6 @@ public class TransactionCommandServiceImpl implements TransactionCommandService 
     public Mono<Transaction> update(String id, Transaction request) {
         return transactionRepository.findById(id)
                 .map(transaction -> {
-                    transaction.setDate(LocalDateTime.now());
                     transaction.setToAccount(request.getToAccount());
                     transaction.setFromAccount(request.getFromAccount());
                     transaction.setAmount(request.getAmount());

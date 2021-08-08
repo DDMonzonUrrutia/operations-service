@@ -12,7 +12,7 @@ public class PaymentRequestDto extends OperationRequestDto{
     private String credit;
     private String creditType;
 
-    static public Payment requestToDto(PaymentRequestDto requestDto) {
+    static public Payment requestToEntity(PaymentRequestDto requestDto) {
         Payment payment = new Payment();
         payment.setAmount(requestDto.getAmount());
         payment.setCredit(requestDto.getCredit());
