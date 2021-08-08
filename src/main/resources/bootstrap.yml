@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: operations-service
+
+  cloud:
+    config:
+      uri: https://config-server.mybluemix.net
+      username: ${SECURITY_USERNAME}
+      password: ${SECURITY_PASSWORD}
+  boot:
+    admin:
+      client:
+        url: https://admin-server.mybluemix.net
