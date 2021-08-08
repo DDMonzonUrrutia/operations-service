@@ -12,4 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Transaction extends Operation{
     private String toAccount;
     private String fromAccount;
+    private String fromAccountType;
+    private String toAccountType;
 }

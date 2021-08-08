@@ -11,6 +11,8 @@ import lombok.Setter;
 public class TransactionResponseDto extends OperationResponseDto{
     private String toAccount;
     private String fromAccount;
+    private String fromAccountType;
+    private String toAccountType;
 
     static public TransactionResponseDto entityToResponse(Transaction transaction) {
         TransactionResponseDto transactionResponseDto = new TransactionResponseDto();
@@ -19,6 +21,8 @@ public class TransactionResponseDto extends OperationResponseDto{
         transactionResponseDto.setDate(transaction.getDate());
         transactionResponseDto.setFromAccount(transaction.getFromAccount());
         transactionResponseDto.setToAccount(transaction.getToAccount());
+        transactionResponseDto.setFromAccountType(transaction.getFromAccountType());
+        transactionResponseDto.setToAccountType(transaction.getToAccountType());
         return transactionResponseDto;
     }
 }

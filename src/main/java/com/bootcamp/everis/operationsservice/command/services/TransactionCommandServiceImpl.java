@@ -5,12 +5,17 @@ import com.bootcamp.everis.operationsservice.query.projections.models.Transactio
 import com.bootcamp.everis.operationsservice.query.projections.repository.repositories.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
 
 @Service
 public class TransactionCommandServiceImpl implements TransactionCommandService {
+
+    @Autowired
+    private WebClient.Builder builder;
+
     @Autowired
     private TransactionRepository transactionRepository;
 
