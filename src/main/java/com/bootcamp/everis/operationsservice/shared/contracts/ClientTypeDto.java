@@ -4,13 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
-public class PersonalResponseDto {
+public class ClientTypeDto {
     private String id;
-    private String phone;
-    private String firstname;
-    private String lastname;
-    private String doi;
+    private String name;
+    private Integer valtip;
 }

@@ -23,7 +23,7 @@ public class DepositQueryServiceImpl implements DepositQueryService {
 
     @Override
     public Mono<Deposit> findById(String id) {
-        return depositRepository.findById(id).switchIfEmpty(Mono.error(new Exception("Transaction not founded")));
+        return depositRepository.findById(id).switchIfEmpty(Mono.error(new Exception("Deposit not founded")));
     }
 
 }

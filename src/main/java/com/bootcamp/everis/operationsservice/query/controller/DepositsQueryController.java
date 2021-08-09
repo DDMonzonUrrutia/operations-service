@@ -26,6 +26,6 @@ public class DepositsQueryController implements BaseQueryController<DepositRespo
     @GetMapping("/deposits/{depositId}")
     @Override
     public Mono<DepositResponseDto> getById(@PathVariable(name = "depositId") String id) {
-        return depositQueryService.findById(id).map(DepositResponseDto::entityToResponse).switchIfEmpty(Mono.error(new Exception("Purchase not founded")));
+        return depositQueryService.findById(id).map(DepositResponseDto::entityToResponse).switchIfEmpty(Mono.error(new Exception("Deposit not founded")));
     }
 }

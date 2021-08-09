@@ -3,7 +3,7 @@ package com.bootcamp.everis.operationsservice.command.controller;
 import com.bootcamp.everis.operationsservice.command.domain.services.RetireCommandService;
 import com.bootcamp.everis.operationsservice.command.dto.RetireRequestDto;
 import com.bootcamp.everis.operationsservice.query.projections.models.Retire;
-import com.bootcamp.everis.operationsservice.shared.contracts.PersonalResponseDto;
+import com.bootcamp.everis.operationsservice.shared.contracts.AccountBankDto;
 import com.bootcamp.everis.operationsservice.shared.dto.RetireResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,12 +27,12 @@ public class RetiresCommandController implements BaseCommandController<RetireReq
     public Mono<RetireResponseDto> create(@RequestBody RetireRequestDto request) {
         Retire retire = RetireRequestDto.requestToEntity(request);
         return builder.build()
-                .get().uri("http://localhost:8081/clients/personals/"+request.getFromAccount())
+                .get().uri("http://localhost:8085/account-banks/"+request.getFromAccount())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .onStatus(HttpStatus::isError, clientResponse -> {
                     return Mono.error(new Exception("error"));
-                }).bodyToMono(PersonalResponseDto.class)
+                }).bodyToMono(AccountBankDto.class)
                 .flatMap(personalResponseDto -> retireCommandService.create(retire)
                         .switchIfEmpty(Mono.error(new Exception("Error while create the retire ")))
                         .map(RetireResponseDto::entityToResponse))

@@ -25,6 +25,6 @@ public class PaymentsQueryController implements BaseQueryController<PaymentRespo
     @GetMapping("/payments/{paymentId}")
     @Override
     public Mono<PaymentResponseDto> getById(@PathVariable(name = "paymentId") String id) {
-        return paymentQueryService.findById(id).map(PaymentResponseDto::entityToResource);
+        return paymentQueryService.findById(id).map(PaymentResponseDto::entityToResource).switchIfEmpty(Mono.error(new Exception("Payment not founded")));
     }
 }

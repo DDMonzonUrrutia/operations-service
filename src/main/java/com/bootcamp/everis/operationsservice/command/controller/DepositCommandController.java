@@ -3,7 +3,7 @@ package com.bootcamp.everis.operationsservice.command.controller;
 import com.bootcamp.everis.operationsservice.command.domain.services.DepositCommandService;
 import com.bootcamp.everis.operationsservice.command.dto.DepositRequestDto;
 import com.bootcamp.everis.operationsservice.query.projections.models.Deposit;
-import com.bootcamp.everis.operationsservice.shared.contracts.PersonalResponseDto;
+import com.bootcamp.everis.operationsservice.shared.contracts.AccountBankDto;
 import com.bootcamp.everis.operationsservice.shared.dto.DepositResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,12 +27,12 @@ public class DepositCommandController implements BaseCommandController<DepositRe
     public Mono<DepositResponseDto> create(@RequestBody DepositRequestDto request) {
         Deposit deposit = DepositRequestDto.requestToEntity(request);
         return builder.build()
-                .get().uri("http://localhost:8081/clients/personals/" + request.getToAccount())
+                .get().uri("http://localhost:8085/account-banks/" + request.getToAccount())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .onStatus(HttpStatus::isError, clientResponse -> {
                     return Mono.error(new Exception("error"));
-                }).bodyToMono(PersonalResponseDto.class)
+                }).bodyToMono(AccountBankDto.class)
                 .flatMap(personalResponseDto -> depositCommandService.create(deposit)
                         .switchIfEmpty(Mono.error(new Exception("Error while create the deposit ")))
                         .map(DepositResponseDto::entityToResponse))

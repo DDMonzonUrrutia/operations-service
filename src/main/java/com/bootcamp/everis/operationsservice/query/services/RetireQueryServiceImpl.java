@@ -21,6 +21,6 @@ public class RetireQueryServiceImpl implements RetireQueryService {
 
     @Override
     public Mono<Retire> findById(String id) {
-        return retireRepository.findById(id);
+        return retireRepository.findById(id).switchIfEmpty(Mono.error(new Exception("Retire not founded")));
     }
 }
