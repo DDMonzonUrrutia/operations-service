@@ -9,9 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @NoArgsConstructor
 @Document
-public class Transaction extends Operation{
-    private String toAccount;
+public class Retire extends Operation{
     private String fromAccount;
     private String fromAccountType;
-    private String toAccountType;
 }
